@@ -33,6 +33,7 @@ namespace Inspire.ViewModels
             _is24HourMode = Settings.Default.Is24HourMode;
             _clockData = ClockService.GetClockData();
             UpdateClockUi();
+            ClockService.StartClockUpdateTimer();
             ClockService.ClockUpdateEvent += ClockServiceClockUpdateEvent;
         }
 

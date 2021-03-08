@@ -16,7 +16,7 @@ namespace InspireData
      ///   Brief Description of the weather condition
      ///   Icon Id representing the weather condition
      /// </summary>
-    public class WeatherService
+    public class WeatherService : BaseHttpService<WeatherData>
     {
         /// <summary>
         /// Method to access the openweathermap website to request current weather data.
@@ -24,17 +24,7 @@ namespace InspireData
         /// <returns>A list of <see cref="WeatherData"/> objects.</returns>
         public static async Task<WeatherData> GetWeatherData(string city = "Boise")
         {
-            string url = $"http://api.openweathermap.org/data/2.5/weather?q={city}&appid=a5700e16ef0c871e40c213ce39c40c58";
-
-            using (HttpResponseMessage response = await ApiHelper.Instance.ApiClient.GetAsync(url))
-            {
-                WeatherData weatherData = new WeatherData();
-                if (response.IsSuccessStatusCode)
-                {
-                    weatherData = await response.Content.ReadAsAsync<WeatherData>();
-                }
-                return weatherData;
-            }
+            return await GetDataFromService($"http://api.openweathermap.org/data/2.5/weather?q={city}&appid=a5700e16ef0c871e40c213ce39c40c58");
         }
     }
 }

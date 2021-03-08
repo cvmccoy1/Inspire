@@ -3,10 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspireUI", ".\InspireUI\InspireUI.csproj", "{3FCC3F2E-3FCF-4EB8-A3E6-E11563169C3E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspireUI", "InspireUI\InspireUI.csproj", "{3FCC3F2E-3FCF-4EB8-A3E6-E11563169C3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspireData", ".\InspireData\InspireData.csproj", "{74F0011B-5C92-448B-871C-74AEBF4ACDBA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspireData", "InspireData\InspireData.csproj", "{74F0011B-5C92-448B-871C-74AEBF4ACDBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspireData.UnitTests", "InspireData.UnitTests\InspireData.UnitTests.csproj", "{475F98AB-3A20-42A9-BF92-44020BFE79F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6D177121-D9FB-49E3-A315-4359210CB85B}"
+	ProjectSection(SolutionItems) = preProject
+		Inspire_TakeHomeChallenge.docx = Inspire_TakeHomeChallenge.docx
+	EndProjectSection
+EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +29,10 @@ Global
 		{74F0011B-5C92-448B-871C-74AEBF4ACDBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74F0011B-5C92-448B-871C-74AEBF4ACDBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74F0011B-5C92-448B-871C-74AEBF4ACDBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{475F98AB-3A20-42A9-BF92-44020BFE79F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{475F98AB-3A20-42A9-BF92-44020BFE79F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{475F98AB-3A20-42A9-BF92-44020BFE79F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{475F98AB-3A20-42A9-BF92-44020BFE79F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

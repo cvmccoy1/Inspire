@@ -19,12 +19,29 @@ namespace InspireData
         /// <returns>A <see cref="ClockData"/> object</returns>
         public static ClockData GetClockData()
         {
-            StartClockUpdateTimer();
             ClockData clockData = new ClockData()
             {
                 CurrentTime = DateTime.Now
             };
             return clockData;
+        }
+
+        /// <summary>
+        /// Starts up an one minute timer
+        /// </summary>
+        /// <returns><b>true<b> if timer was started.<b>false</b> if already started.</returns>
+        public static bool StartClockUpdateTimer()
+        {
+            if (_clockTimer == null)
+            {
+                _clockTimer = new Timer();
+                _clockTimer.AutoReset = false;
+                _clockTimer.Elapsed += new ElapsedEventHandler(TimerElapsedEvent);
+                _clockTimer.Interval = GetInterval();
+                _clockTimer.Start();
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -36,21 +53,6 @@ namespace InspireData
         };
 
         private static Timer _clockTimer;
-
-        /// <summary>
-        /// Starts up an one minute timer
-        /// </summary>
-        private static void StartClockUpdateTimer()
-        {
-            if (_clockTimer == null)
-            {
-                _clockTimer = new Timer();
-                _clockTimer.AutoReset = false;
-                _clockTimer.Elapsed += new System.Timers.ElapsedEventHandler(TimerElapsedEvent);
-                _clockTimer.Interval = GetInterval();
-                _clockTimer.Start();
-            }
-        }
 
         /// <summary>
         /// Method called when the timer is fired.

@@ -91,7 +91,7 @@ namespace Inspire.ViewModels
             {
                 WeatherData currentWeatherData = await WeatherService.GetWeatherData();
                 Temperature selectedTemperatureMode = SelectedTemperature;
-                ConverterDelegate converter = selectedTemperatureMode.Converter;
+                ConverterDelegate converter = selectedTemperatureMode.Converter;  // Method used to convert the temperature from Kelvin to the selected temperature mode.
                 string symbol = selectedTemperatureMode.Symbol;
                 CurrentTemperature = $"{converter(currentWeatherData.CurrentTemperature)}° {symbol}";
                 HighTemperature = $"{converter(currentWeatherData.HighTemperature)}° {symbol}";
@@ -104,7 +104,6 @@ namespace Inspire.ViewModels
                 Debug.Fail($"Unable to update the Weather : {exp.Message}");
             }
         }
-
 
         /// <summary>
         /// Updates the Background Image from the Image Service

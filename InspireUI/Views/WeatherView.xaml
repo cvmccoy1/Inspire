@@ -21,13 +21,13 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Margin="5" FontSize="18"
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="5" FontSize="22"
                            Foreground="White"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"                   
                            Text="{Binding CurrentTemperature}"/>
                 <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" >
-                    <Label Content="Low:" 
+                    <Label Content="High:" 
                            Margin="2"
                            Foreground="White"
                            VerticalAlignment="Center"
@@ -39,7 +39,7 @@
                            Text="{Binding HighTemperature}" />
                 </StackPanel>
                 <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" >
-                    <Label Content="High:" Margin="2"
+                    <Label Content="Low:" Margin="2"
                            Foreground="White"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"/>
@@ -49,12 +49,12 @@
                                HorizontalAlignment="Left"
                                Text="{Binding LowTemperature}" />
                 </StackPanel>
-                <Image Grid.Row="0" Grid.Column="1" Width="32" Height="32"
-                       VerticalAlignment="Center"
+                <Image Grid.Row="0" Grid.Column="1" Width="40" Height="40"
+                       VerticalAlignment="Top"
                        HorizontalAlignment="Center"
                        Source="{Binding WeatherIcon}" />
                 <TextBlock Grid.Row="1" Grid.Column="1" 
-                           Margin="5" FontSize="18"
+                           Margin="5" FontSize="12"
                            Foreground="White"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"                   

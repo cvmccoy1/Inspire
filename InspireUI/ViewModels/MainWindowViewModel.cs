@@ -24,10 +24,15 @@ namespace Inspire.ViewModels
 
         public MainWindowViewModel()
         {
+            //Establish bindling to the New Image button
             NewImageButtonCommand = new RelayCommand(o => NewImageButtonClick(nameof(NewImageButtonCommand)));
+
             UpdateBackgroundImageUi();
         }
 
+        /// <summary>
+        /// Method called when the New Image button is clicked.
+        /// </summary>
         private void NewImageButtonClick(object sender)
         {
             UpdateBackgroundImageUi();

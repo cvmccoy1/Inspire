@@ -12,9 +12,15 @@ namespace Inspire.ViewModels
 {
     public class QuoteViewModel : BaseViewModel
     {
-        private int _currentQuoteIndex = 0;
-
+        /// <summary>
+        /// Contains a list of available quotes to display
+        /// </summary>
         private List<QuoteData> _quoteDataList;
+
+        /// <summary>
+        /// Contains the index into the list of quotes of the one currently in use
+        /// </summary>
+        private int _currentQuoteIndex = 0;
 
         public string Quote { get; set; }
 
@@ -36,10 +42,16 @@ namespace Inspire.ViewModels
         /// </summary>
         public QuoteViewModel()
         {
+            // Establish binding to the New Quote button
             NewQuoteButtonCommand = new RelayCommand(o => NewQuoteButtonClick(nameof(NewQuoteButtonCommand)));
+
+            // Establish binding to the Mouse Enter and Leave events for the Quote TextBlock
             QuoteMouseEnterCommand = new RelayCommand(o => QuoteMouseEnter(nameof(QuoteMouseEnterCommand)));
             QuoteMouseLeaveCommand = new RelayCommand(o => QuoteMouseLeave(nameof(QuoteMouseLeaveCommand)));
+
+            // Initially the Author TextBlock is hidden...visible only when mouse is hoving over the Quote TextBlock
             AuthorVisibility = Visibility.Hidden;
+
             UpdateQuoteUi();
         }
 
@@ -62,8 +74,19 @@ namespace Inspire.ViewModels
         /// Updates the Quote Information from the Quotes Service
         /// </summary>
         /// <remarks> The Quotes Service returns a list of 10 quotes.  Once all of the quotes have
-        /// been used, a new request for 10 new quotes is done.</remarks>
+        /// been displayed, a request for 10 new quotes will be done.</remarks>
         private async void UpdateQuoteUi()
+        {
+            await GetNextAvailableQuote();
+            UpdateQuoteAndAuthor();
+        }
+
+        /// <summary>
+        /// A list of quotes (about 10) is kept until all the quotes in the list have been displayed.
+        /// Once all of the quotes have been used (or at start up), the list is refreshed with a new 
+        /// list of quotes, retrieved from the <see cref="QuoteService"/>.
+        /// </summary>
+        private async Task GetNextAvailableQuote()
         {
             int quoteCount = _quoteDataList != null ? _quoteDataList.Count : 0;
             if (++_currentQuoteIndex >= quoteCount)
@@ -81,6 +104,10 @@ namespace Inspire.ViewModels
                     _currentQuoteIndex = 0;
                 }
             }
+        }
+
+        private void UpdateQuoteAndAuthor()
+        {
             if (_quoteDataList != null && _quoteDataList.Count > 0)
             {
                 Quote = HtmlToTextConverter.HTMLToText(_quoteDataList[_currentQuoteIndex].Quote).TrimEnd('\n');
