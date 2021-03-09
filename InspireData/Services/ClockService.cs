@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace InspireData
@@ -11,13 +7,13 @@ namespace InspireData
     /// Class to provide a service to retrieve and update the clock data.
     /// At present, only provides the current time.
     /// </summary>
-    public class ClockService
+    public class ClockService : IClockService
     {
         /// <summary>
         /// Retrieves the clock data
         /// </summary>
         /// <returns>A <see cref="ClockData"/> object</returns>
-        public static ClockData GetClockData()
+        public IClockData GetClockData()
         {
             ClockData clockData = new ClockData()
             {
@@ -30,7 +26,7 @@ namespace InspireData
         /// Starts up an one minute timer
         /// </summary>
         /// <returns><b>true<b> if timer was started.<b>false</b> if already started.</returns>
-        public static bool StartClockUpdateTimer()
+        public bool StartClockUpdateTimer()
         {
             if (_clockTimer == null)
             {
@@ -47,7 +43,7 @@ namespace InspireData
         /// <summary>
         /// Event that fires every minute on the minute, providing an updated <see cref="ClockData"/> object.
         /// </summary>
-        public static event EventHandler<ClockEventArgs> ClockUpdateEvent = (sender, e) => 
+        public event EventHandler<ClockEventArgs> ClockUpdateEvent = (sender, e) => 
         {
             // A body for debugging
         };
@@ -57,7 +53,7 @@ namespace InspireData
         /// <summary>
         /// Method called when the timer is fired.
         /// </summary>
-        private static void TimerElapsedEvent(object sender, System.Timers.ElapsedEventArgs e)
+        private void TimerElapsedEvent(object sender, System.Timers.ElapsedEventArgs e)
         {
             ClockUpdateEvent?.Invoke(null, new ClockEventArgs());
             _clockTimer.Interval = GetInterval();
@@ -67,15 +63,10 @@ namespace InspireData
         /// <summary>
         /// Calculates when the next minute will occur (in milliseconds).
         /// </summary>
-        private static double GetInterval()
+        private double GetInterval()
         {
             DateTime now = DateTime.Now;
             return ((60 - now.Second) * 1000 - now.Millisecond);
         }
-    }
-
-    public class ClockEventArgs : EventArgs
-    {
-        public ClockData ClockData { get; set; } = new ClockData();
     }
 }

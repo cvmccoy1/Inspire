@@ -1,21 +1,26 @@
 ﻿using Inspire.Properties;
 using InspireData;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Inspire.ViewModels
 {
     public class ClockViewModel : BaseViewModel
     {
-        private ClockData _clockData;
-
+        private IClockService _clockService;
+        private IClockData _clockData;
+        
+        /// <summary>
+        /// Property bound to the Current Time TextBlock Text
+        /// </summary>
         public string CurrentTime { get; set; }
 
+        /// <summary>
+        /// Property bound to the Time of Day Greeting TextBlock Text
+        /// </summary>
         public string TimeOfDayGreeting { get; set; }
 
+        /// <summary>
+        /// Property bound to the 24 Hour Mode Checkbox
+        /// </summary>
         private bool _is24HourMode = false;
         public bool Is24HourMode
         {
@@ -28,13 +33,14 @@ namespace Inspire.ViewModels
             }
         }
 
-        public ClockViewModel()
+        public ClockViewModel(IClockService clockService)
         {
+            _clockService = clockService;
             _is24HourMode = Settings.Default.Is24HourMode;
-            _clockData = ClockService.GetClockData();
+            _clockData = _clockService.GetClockData();
             UpdateClockUi();
-            ClockService.StartClockUpdateTimer();
-            ClockService.ClockUpdateEvent += ClockServiceClockUpdateEvent;
+            _clockService.StartClockUpdateTimer();
+            _clockService.ClockUpdateEvent += ClockServiceClockUpdateEvent;
         }
 
         private void ClockServiceClockUpdateEvent(object sender, ClockEventArgs e)

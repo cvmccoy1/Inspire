@@ -10,7 +10,7 @@
     <GroupBox Margin="10,10,10,10" FontSize="16" FontWeight="Bold"  
             Background="LightYellow" BorderBrush="Green" BorderThickness="3">
         <GroupBox.Header>
-            <Label Foreground="Green">Quote of the Day</Label>
+            <Label Foreground="Green">Quotes of the Day</Label>
         </GroupBox.Header>
         <Grid>
             <Grid.RowDefinitions>

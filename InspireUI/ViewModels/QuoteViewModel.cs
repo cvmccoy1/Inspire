@@ -3,8 +3,6 @@ using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -12,36 +10,59 @@ namespace Inspire.ViewModels
 {
     public class QuoteViewModel : BaseViewModel
     {
+        private IQuoteService _quoteService; 
+
         /// <summary>
         /// Contains a list of available quotes to display
         /// </summary>
-        private List<QuoteData> _quoteDataList;
+        private List<IQuoteData> _quoteDataList;
 
         /// <summary>
         /// Contains the index into the list of quotes of the one currently in use
         /// </summary>
         private int _currentQuoteIndex = 0;
 
+
+        /// <summary>
+        /// Property Bound to the Quote TextBlock Text
+        /// </summary>
         public string Quote { get; set; }
 
+        /// <summary>
+        /// Property Bound to the Author TextBlock Text
+        /// </summary>
         public string Author { get; set; }
 
+        /// <summary>
+        /// Property Bound to the Author TextBlock Visibility
+        /// </summary>
         public Visibility AuthorVisibility { get; set; }
 
+        /// <summary>
+        /// Command Bound the New Quote Button Click Event
+        /// </summary>
         [DoNotNotify]
         public RelayCommand NewQuoteButtonCommand { get; set; }
 
+        /// <summary>
+        /// Command Bound to the Quote Mouse Enter Event
+        /// </summary>
         [DoNotNotify]
         public RelayCommand QuoteMouseEnterCommand { get; set; }
 
+        /// <summary>
+        /// Command Bound to the Quote Mouse Exit Event
+        /// </summary
         [DoNotNotify]
         public RelayCommand QuoteMouseLeaveCommand { get; set; }
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public QuoteViewModel()
+        public QuoteViewModel(IQuoteService quoteService)
         {
+            _quoteService = quoteService;
+
             // Establish binding to the New Quote button
             NewQuoteButtonCommand = new RelayCommand(o => NewQuoteButtonClick(nameof(NewQuoteButtonCommand)));
 
@@ -78,7 +99,7 @@ namespace Inspire.ViewModels
         private async void UpdateQuoteUi()
         {
             await GetNextAvailableQuote();
-            UpdateQuoteAndAuthor();
+            UpdateQuoteAndAuthorUi();
         }
 
         /// <summary>
@@ -93,7 +114,7 @@ namespace Inspire.ViewModels
             {
                 try
                 {
-                    _quoteDataList = await QuoteService.GetQouteData();
+                    _quoteDataList = await _quoteService.GetQouteData();
                 }
                 catch (Exception exp)
                 {
@@ -106,11 +127,11 @@ namespace Inspire.ViewModels
             }
         }
 
-        private void UpdateQuoteAndAuthor()
+        private void UpdateQuoteAndAuthorUi()
         {
             if (_quoteDataList != null && _quoteDataList.Count > 0)
             {
-                Quote = HtmlToTextConverter.HTMLToText(_quoteDataList[_currentQuoteIndex].Quote).TrimEnd('\n');
+                Quote = _quoteDataList[_currentQuoteIndex].Quote.TrimEnd('\n');
                 Author = $"-- {_quoteDataList[_currentQuoteIndex].Author}";
             }
             else

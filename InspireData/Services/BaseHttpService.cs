@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace InspireData
-{ 
+{
     public abstract class BaseHttpService<T> where T : new()
     {
-        protected static async Task<T> GetDataFromService(string url)
+        protected async Task<T> GetDataFromService(string url)
         {
             T data = new T();
             using (HttpResponseMessage response = await ResponseFromHttpGetRequest(url))
@@ -27,7 +24,7 @@ namespace InspireData
             return data;
         }
 
-        private static async Task<HttpResponseMessage> ResponseFromHttpGetRequest(string url)
+        private async Task<HttpResponseMessage> ResponseFromHttpGetRequest(string url)
         {
             HttpResponseMessage response = null;
             try
@@ -41,7 +38,7 @@ namespace InspireData
             return response;
         }
 
-        private static async Task<T> ParseImageDataFromHttpResponseMessage(HttpResponseMessage response) 
+        private async Task<T> ParseImageDataFromHttpResponseMessage(HttpResponseMessage response) 
         {
             T data = new T();
             try

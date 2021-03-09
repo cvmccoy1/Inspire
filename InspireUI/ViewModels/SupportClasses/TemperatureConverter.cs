@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 
 namespace Inspire.ViewModels
 {
@@ -21,6 +16,11 @@ namespace Inspire.ViewModels
         public string Symbol { get; set; }
 
         public ConverterDelegate Converter { get; set; }
+
+        public string DisplayText(double tempInKelving)
+        {
+            return $"{Converter(tempInKelving)}° {Symbol}";
+        }
 
         private static int KelvinToFahrenheitConverter(double tempInKelving) => (int)(tempInKelving * 9 / 5 - 459.67 + 0.5);
 

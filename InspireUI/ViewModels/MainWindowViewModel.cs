@@ -1,12 +1,7 @@
 ﻿using InspireData;
 using PropertyChanged;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -17,13 +12,23 @@ namespace Inspire.ViewModels
     /// </summary>
     public class MainWindowViewModel : BaseViewModel
     {
+        private IImageService _imageService;
+
+        /// <summary>
+        /// Property bound to the Background's Image
+        /// </summary>
         public BitmapImage BackgroundImage { get; set; }
 
+        /// <summary>
+        /// Command bound to the New Image Button's Click event
+        /// </summary>
         [DoNotNotify]
         public RelayCommand NewImageButtonCommand { get; set; }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IImageService imageService)
         {
+            _imageService = imageService;
+
             //Establish bindling to the New Image button
             NewImageButtonCommand = new RelayCommand(o => NewImageButtonClick(nameof(NewImageButtonCommand)));
 
@@ -44,7 +49,7 @@ namespace Inspire.ViewModels
             SetMouseCursor(Cursors.Wait);
             try
             {
-                ImageData imageData = await ImageService.GetImageData();
+                IImageData imageData = await _imageService.GetImageData();
                 Uri uriSource = new Uri(imageData.Url, UriKind.Absolute);
                 BackgroundImage = new BitmapImage(uriSource);
             }

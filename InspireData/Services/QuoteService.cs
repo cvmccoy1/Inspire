@@ -1,9 +1,5 @@
-﻿using InspireData;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace InspireData
@@ -11,15 +7,16 @@ namespace InspireData
      /// Class to provide a service to retrieve Quote data.
      /// The service provides a list of quotes and authors (around 10).
      /// </summary>
-    public class QuoteService : BaseHttpService<List<QuoteData>>
+    public class QuoteService : BaseHttpService<List<QuoteData>>, IQuoteService
     {
         /// <summary>
         /// Method to access the quotesondes website to request a list of quotes/authors.
         /// </summary>
         /// <returns>A list of <see cref="QuoteData"/> objects.</returns>
-        public static async Task<List<QuoteData>> GetQouteData()
+        public async Task<List<IQuoteData>> GetQouteData()
         {
-            return await GetDataFromService($"https://quotesondesign.com/wp-json/wp/v2/posts/?orderby=rand");
+            List<QuoteData> temp = await GetDataFromService($"https://quotesondesign.com/wp-json/wp/v2/posts/?orderby=rand");
+            return temp.Cast<IQuoteData>().ToList();
         }
     }
 }

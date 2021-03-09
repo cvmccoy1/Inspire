@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace Inspire.ViewModels
+namespace InspireData
 {
-    public class HtmlToTextConverter
+    public class FormatConverter
     {
         /// <summary>
         /// Converts HTML to Text.

@@ -1,40 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace InspireData
 {
     /// <summary>
     /// Class containing all of the Weather data
     /// </summary>
-    public class WeatherData
+    public class WeatherData : IWeatherData
     {
-
+        /// <summary>
+        /// The Current Temperature (in Kelvin)
+        /// </summary>
         [JsonIgnore]
         public double CurrentTemperature 
         {
             get => Main.Temp;
         }
         
+        /// <summary>
+        /// The Day's High Temperature (in Kelvin)
+        /// </summary>
         [JsonIgnore]
         public double HighTemperature
         {
             get => Main.TempMax;
         }
 
+        /// <summary>
+        /// The Day's Low Temperature (in Kelvin)
+        /// </summary>
         [JsonIgnore]
         public double LowTemperature
         {
             get => Main.TempMin;
         }
 
+        /// <summary>
+        /// Url to an icon representative of the current weather conditions
+        /// </summary>
         [JsonIgnore]
-        public string WeatherIcon
+        public string WeatherIconUrl
         {
-            get => Weather[0].Icon;
+            get => $"http://openweathermap.org/img/wn/{Weather[0].Icon}@2x.png";
         }
 
+        /// <summary>
+        /// A descripton of the current weather conditions (in plain text)
+        /// </summary>
         [JsonIgnore]
         public string Description
         {

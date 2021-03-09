@@ -2,13 +2,8 @@
 using InspireData;
 using PropertyChanged;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Media.Imaging;
 using static Inspire.ViewModels.Temperature;
@@ -17,20 +12,44 @@ namespace Inspire.ViewModels
 {
     public class WeatherViewModel : BaseViewModel
     {
+        IWeatherService _weatherService;
+
+        private const string LOCAL_CITY = "Eagle";
+
+        /// <summary>
+        /// Propety bound to the Current Temperature TextBlock
+        /// </summary>
         public string CurrentTemperature { get; set; }
 
+        /// <summary>
+        /// Propety bound to the High Temperature TextBlock
+        /// </summary>
         public string HighTemperature { get; set; }
 
+        /// <summary>
+        /// Propety bound to the High Temperature TextBlock
+        /// </summary>
         public string LowTemperature { get; set; }
 
+        /// <summary>
+        /// Propety bound to the Current Temperature's Condition TextBlock
+        /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        /// Propety bound to the Current Temperature's Condition Image (Icon)
+        /// </summary>
         public BitmapImage WeatherIcon { get; set; }
 
+        /// <summary>
+        /// Propety bound to the Temperature Format Combobox's List of Options
+        /// </summary>
         public ObservableCollection<Temperature> Temperatures { get; set; }
 
         private Temperature _selectedTemperature;
-
+        /// <summary>
+        /// Property bound to the Temperature Format Combobox's Currently Selected Item
+        /// </summary>
         public Temperature SelectedTemperature
         {
             get => _selectedTemperature;
@@ -44,6 +63,9 @@ namespace Inspire.ViewModels
             }
         }
 
+        /// <summary>
+        /// Property bound to the Temperature Format Combobox's Currently Selected Index
+        /// </summary>
         [SuppressPropertyChangedWarnings]
         public int SelectedTemperatureIndex
         {
@@ -56,8 +78,9 @@ namespace Inspire.ViewModels
             }
         }
 
-        public WeatherViewModel()
+        public WeatherViewModel(IWeatherService weatherService)
         {
+            _weatherService = weatherService;
             Temperatures = Temperature.PopulateCollection();
             SelectedTemperature = Temperatures[Settings.Default.TemperatureModeIndex];
             StartWeatherUpdateTimer();
@@ -89,15 +112,14 @@ namespace Inspire.ViewModels
         {
             try
             {
-                WeatherData currentWeatherData = await WeatherService.GetWeatherData();
+                IWeatherData currentWeatherData = await _weatherService.GetWeatherData(LOCAL_CITY);
+
                 Temperature selectedTemperatureMode = SelectedTemperature;
-                ConverterDelegate converter = selectedTemperatureMode.Converter;  // Method used to convert the temperature from Kelvin to the selected temperature mode.
-                string symbol = selectedTemperatureMode.Symbol;
-                CurrentTemperature = $"{converter(currentWeatherData.CurrentTemperature)}° {symbol}";
-                HighTemperature = $"{converter(currentWeatherData.HighTemperature)}° {symbol}";
-                LowTemperature = $"{converter(currentWeatherData.LowTemperature)}° {symbol}";
+                CurrentTemperature = selectedTemperatureMode.DisplayText(currentWeatherData.CurrentTemperature);
+                HighTemperature = selectedTemperatureMode.DisplayText(currentWeatherData.HighTemperature); 
+                LowTemperature = selectedTemperatureMode.DisplayText(currentWeatherData.LowTemperature);
                 Description = currentWeatherData.Description;
-                WeatherIcon = GetWeatherImage(currentWeatherData.WeatherIcon);
+                WeatherIcon = GetWeatherIconFromUrl(currentWeatherData.WeatherIconUrl);
             }
             catch (Exception exp)
             {
@@ -108,12 +130,11 @@ namespace Inspire.ViewModels
         /// <summary>
         /// Updates the Background Image from the Image Service
         /// </summary>
-        private BitmapImage GetWeatherImage(string weatherId)
+        private BitmapImage GetWeatherIconFromUrl(string url)
         {
             BitmapImage image = null;
             try
             {
-                string url = $"http://openweathermap.org/img/wn/{weatherId}@2x.png";
                 Uri uriSource = new Uri(url, UriKind.Absolute);
                 image = new BitmapImage(uriSource);
             }

@@ -1,9 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using InspireData;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 
@@ -15,26 +11,31 @@ namespace InspireData.Tests
         [TestMethod()]
         public void GetClockData_VerifyCorrectClockData()
         {
+            const string TIME_FORMAT = "g";
+            IClockService clockService = new ClockService();
+
             // Arrange
-            DateTime expectedDateTime = DateTime.Now;
+            string expectedTime = DateTime.Now.ToString(TIME_FORMAT);
 
             // Act
-            ClockData clockData = ClockService.GetClockData();
+            string actualTime = clockService.GetClockData().CurrentTime.ToString(TIME_FORMAT);
 
-            //Assert
-            Assert.AreEqual(expectedDateTime.ToString("g"), clockData.CurrentTime.ToString("g"), $"Current Time provided doesn't appear to be correct.");
+            // Assert
+            Assert.AreEqual(expectedTime, actualTime, $"Current Time provided doesn't appear to be correct.");
         }
 
-        // Note that the following test could take up to a minute to run (or a bit more if it fails).
-        private readonly SemaphoreSlim _signal = new SemaphoreSlim(0, 1);
-        private const string TIME_FORMAT = "HH:mm";
-        private string _newTime;
 
+        // Note that the following test could take up to a minute to run (or a bit more if it fails).
         [TestMethod()]
         public async Task StartClockUpdateTimer_VerifyClockUpdateEventFired()
         {
+            IClockService clockService = new ClockService();
+            SemaphoreSlim _signal = new SemaphoreSlim(0, 1);
+            const string TIME_FORMAT = "HH:mm";
+            string _newTime = string.Empty;
+
             // Arrange
-            ClockData clockData = ClockService.GetClockData();
+            IClockData clockData = clockService.GetClockData();
             string expectedDateTime = clockData.CurrentTime.AddMinutes(1.0).ToString(TIME_FORMAT);
             EventHandler<ClockEventArgs> ClockUpdateEvent = (sender, e) =>
             {
@@ -43,18 +44,18 @@ namespace InspireData.Tests
             };
 
             // Act
-            Assert.IsTrue(ClockService.StartClockUpdateTimer(), "The Clock Timer should not have already been started.");
-            ClockService.ClockUpdateEvent += ClockUpdateEvent;
+            Assert.IsTrue(clockService.StartClockUpdateTimer(), "The Clock Timer should not have already been started.");
+            clockService.ClockUpdateEvent += ClockUpdateEvent;
             try
             {
                 // Assert
                 Assert.IsTrue(await _signal.WaitAsync(65000), $"The Clock Service event did not fire within a minute.");
                 Assert.AreEqual(expectedDateTime, _newTime, "The new time is not one minute past the original time.");
-                Assert.IsFalse(ClockService.StartClockUpdateTimer(), "The Clock Timer should have already been started.");
+                Assert.IsFalse(clockService.StartClockUpdateTimer(), "The Clock Timer should have already been started.");
             }
             finally
             {
-                ClockService.ClockUpdateEvent -= ClockUpdateEvent;
+                clockService.ClockUpdateEvent -= ClockUpdateEvent;
             }
         }
     }
