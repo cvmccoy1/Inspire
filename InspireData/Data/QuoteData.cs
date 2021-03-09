@@ -13,7 +13,7 @@ namespace InspireData
         [JsonIgnore]
         public string Author
         {
-            get => Title.Rendered;
+            get => FormatConverter.HTMLToText(Title.Rendered);
         }
 
         /// <summary>

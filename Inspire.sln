@@ -14,7 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Inspire_TakeHomeChallenge.docx = Inspire_TakeHomeChallenge.docx
 	EndProjectSection
 EndProject
-
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspireUI.UnitTests", "InspireUI.UnitTests\InspireUI.UnitTests.csproj", "{D46E2C42-172E-427B-A048-BDCB9A2C91F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +34,10 @@ Global
 		{475F98AB-3A20-42A9-BF92-44020BFE79F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{475F98AB-3A20-42A9-BF92-44020BFE79F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{475F98AB-3A20-42A9-BF92-44020BFE79F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D46E2C42-172E-427B-A048-BDCB9A2C91F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D46E2C42-172E-427B-A048-BDCB9A2C91F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D46E2C42-172E-427B-A048-BDCB9A2C91F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D46E2C42-172E-427B-A048-BDCB9A2C91F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

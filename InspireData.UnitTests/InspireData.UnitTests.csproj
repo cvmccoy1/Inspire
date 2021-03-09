@@ -203,7 +203,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ClockServiceTests.cs" />
-    <Compile Include="Services\ImageServiceTests.cs" />
+    <Compile Include="SupportClasses\FormatConverterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -29,7 +29,7 @@ namespace Inspire.ViewModels
             { 
                 _is24HourMode = value;
                 Settings.Default.Is24HourMode = value;
-                UpdateClockUi();
+                UpdateClockUiBindings();
             }
         }
 
@@ -38,7 +38,7 @@ namespace Inspire.ViewModels
             _clockService = clockService;
             _is24HourMode = Settings.Default.Is24HourMode;
             _clockData = _clockService.GetClockData();
-            UpdateClockUi();
+            UpdateClockUiBindings();
             _clockService.StartClockUpdateTimer();
             _clockService.ClockUpdateEvent += ClockServiceClockUpdateEvent;
         }
@@ -46,10 +46,10 @@ namespace Inspire.ViewModels
         private void ClockServiceClockUpdateEvent(object sender, ClockEventArgs e)
         {
             _clockData = e.ClockData;
-            UpdateClockUi();
+            UpdateClockUiBindings();
         }
 
-        private void UpdateClockUi()
+        private void UpdateClockUiBindings()
         {
             string timeFormat = Is24HourMode ? "H:mm" : "h:mm tt";
             CurrentTime = _clockData.CurrentTime.ToString(timeFormat);
