@@ -16,7 +16,6 @@ namespace InspireData.Tests
 
             // Assert
             Assert.AreEqual(expectedPlainText, actualPlainText, "The HTML converter did not work correctly.");
-
         }
     }
 }
