@@ -4,6 +4,7 @@ using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Media.Imaging;
 using static Inspire.ViewModels.Temperature;
@@ -108,11 +109,11 @@ namespace Inspire.ViewModels
             _syncContext.Post(o => UpdateWeatherUi(), null);
         }
 
-        private async void UpdateWeatherUi()
+        private void UpdateWeatherUi()
         {
             try
             {
-                IWeatherData currentWeatherData = await _weatherService.GetWeatherData(LOCAL_CITY);
+                IWeatherData currentWeatherData = _weatherService.GetWeatherData(LOCAL_CITY);
 
                 Temperature selectedTemperatureMode = SelectedTemperature;
                 CurrentTemperature = selectedTemperatureMode.DisplayText(currentWeatherData.CurrentTemperature);

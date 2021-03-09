@@ -7,14 +7,21 @@ namespace InspireData
 {
     public abstract class BaseHttpService<T> where T : new()
     {
-        protected async Task<T> GetDataFromService(string url)
+        protected T GetDataFromService(string url)
+        {
+            Task<T> task = Task<T>.Run(() => GetDataFromServiceAsync(url));
+            task.Wait();
+            return task.Result;
+        }
+
+        private async Task<T> GetDataFromServiceAsync(string url)
         {
             T data = new T();
-            using (HttpResponseMessage response = await ResponseFromHttpGetRequest(url))
+            using (HttpResponseMessage response = await ResponseFromHttpGetRequestAsync(url))
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    data = await ParseImageDataFromHttpResponseMessage(response);
+                    data = await ParseImageDataFromHttpResponseMessageAsync(response);
                 }
                 else
                 {
@@ -24,7 +31,7 @@ namespace InspireData
             return data;
         }
 
-        private async Task<HttpResponseMessage> ResponseFromHttpGetRequest(string url)
+        private async Task<HttpResponseMessage> ResponseFromHttpGetRequestAsync(string url)
         {
             HttpResponseMessage response = null;
             try
@@ -38,7 +45,7 @@ namespace InspireData
             return response;
         }
 
-        private async Task<T> ParseImageDataFromHttpResponseMessage(HttpResponseMessage response) 
+        private async Task<T> ParseImageDataFromHttpResponseMessageAsync(HttpResponseMessage response) 
         {
             T data = new T();
             try

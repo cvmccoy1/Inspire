@@ -13,7 +13,7 @@ namespace InspireData
         /// Retrieves the clock data
         /// </summary>
         /// <returns>A <see cref="ClockData"/> object</returns>
-        public IClockData GetClockData()
+        public ClockData GetClockData()
         {
             ClockData clockData = new ClockData()
             {

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:view="clr-namespace:Inspire.Views"
         xmlns:p="clr-namespace:Inspire.Properties"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         Title="In Time Tec Take Home Assignment" 
         Icon="/Resources/in-time-tec.jpg"
@@ -23,7 +24,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.Background>
-            <ImageBrush x:Name="TheBackground" ImageSource="{Binding BackgroundImage}" Stretch="UniformToFill"/>
+            <ImageBrush x:Name="TheBackground" ImageSource="{Binding BackgroundImage}" Stretch="UniformToFill">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Changed" >
+                        <i:InvokeCommandAction Command="{Binding ImageChangedCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ImageBrush>
         </Grid.Background>
 
         <view:QuoteView Grid.Column="0" HorizontalAlignment="Left" />

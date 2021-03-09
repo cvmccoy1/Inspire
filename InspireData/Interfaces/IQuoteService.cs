@@ -8,7 +8,7 @@ namespace InspireData
 {
     public interface IQuoteService
     {
-        Task<List<IQuoteData>> GetQouteData();
+        QuoteData GetQouteData();
     }
 
     public interface IQuoteData

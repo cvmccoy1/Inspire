@@ -2,6 +2,7 @@
 using PropertyChanged;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -25,41 +26,55 @@ namespace Inspire.ViewModels
         [DoNotNotify]
         public RelayCommand NewImageButtonCommand { get; set; }
 
+        /// <summary>
+        /// Command Bound to the Background Image changed Event
+        /// </summary>
+        [DoNotNotify]
+        public RelayCommand ImageChangedCommand { get; set; }
+
         public MainWindowViewModel(IImageService imageService)
         {
             _imageService = imageService;
 
             //Establish bindling to the New Image button
             NewImageButtonCommand = new RelayCommand(o => NewImageButtonClick(nameof(NewImageButtonCommand)));
+            ImageChangedCommand = new RelayCommand(o => ImageChanged(nameof(ImageChangedCommand)));
 
-            UpdateBackgroundImageUi();
+            UpdateBackgroundImageUiAsync();
         }
 
         /// <summary>
         /// Method called when the New Image button is clicked.
         /// </summary>
-        private void NewImageButtonClick(object sender)
+        private void NewImageButtonClick(string sender)
         {
-            UpdateBackgroundImageUi();
+            UpdateBackgroundImageUiAsync();
         }
 
-        private async void UpdateBackgroundImageUi()
+        /// <summary>
+        /// Method called when the Background Image Change event is fired.
+        /// </summary>
+        /// <param name="sender"></param>
+        private void ImageChanged(string sender)
+        {
+            SetMouseCursor(null);
+        }
+
+        private async void UpdateBackgroundImageUiAsync()
         {
             // This operation seems to take a while, so let the user know via the mouse icon
             SetMouseCursor(Cursors.Wait);
             try
             {
-                IImageData imageData = await _imageService.GetImageData();
+                ImageData imageData = await Task.Run(() =>_imageService.GetImageData());
+
                 Uri uriSource = new Uri(imageData.Url, UriKind.Absolute);
                 BackgroundImage = new BitmapImage(uriSource);
             }
             catch (Exception exp)
             {
-                Debug.Fail($"Unable to retieve the background image: {exp.Message}");
-            }
-            finally
-            {
                 SetMouseCursor(null);
+                Debug.Fail($"Unable to retieve the background image: {exp.Message}");
             }
         }
     }

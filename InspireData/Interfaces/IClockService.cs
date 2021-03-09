@@ -15,7 +15,7 @@ namespace InspireData
         /// Gets the lastest Clock Data
         /// </summary>
         /// <returns>A <see cref="ClockData"/> object</returns>
-        IClockData GetClockData();
+        ClockData GetClockData();
 
         /// <summary>
         /// Starts the Clock Update Timer so that the <see cref="ClockUpdateEvent"/> will fire.

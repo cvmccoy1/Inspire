@@ -6,7 +6,7 @@ namespace Inspire.ViewModels
     public class ClockViewModel : BaseViewModel
     {
         private IClockService _clockService;
-        private IClockData _clockData;
+        private ClockData _clockData;
         
         /// <summary>
         /// Property bound to the Current Time TextBlock Text

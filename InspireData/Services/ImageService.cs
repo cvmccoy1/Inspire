@@ -12,9 +12,9 @@ namespace InspireData
         /// Method to access the splashbase website, requesting a random image.
         /// </summary>
         /// <returns>An <see cref="ImageData"/> object.</returns>
-        public async Task<IImageData> GetImageData()
+        public ImageData GetImageData()
         {
-            return await GetDataFromService($"http://www.splashbase.co/api/v1/images/random");
+            return GetDataFromService($"http://www.splashbase.co/api/v1/images/random");
         }
     }
 }

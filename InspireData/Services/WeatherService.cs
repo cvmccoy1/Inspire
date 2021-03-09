@@ -17,9 +17,9 @@ namespace InspireData
         /// Method to access the openweathermap website to request current weather data.
         /// </summary>
         /// <returns>A list of <see cref="WeatherData"/> objects.</returns>
-        public async Task<IWeatherData> GetWeatherData(string city = "Boise")
+        public IWeatherData GetWeatherData(string city = "Boise")
         {
-            return await GetDataFromService($"http://api.openweathermap.org/data/2.5/weather?q={city}&appid=a5700e16ef0c871e40c213ce39c40c58");
+            return GetDataFromService($"http://api.openweathermap.org/data/2.5/weather?q={city}&appid=a5700e16ef0c871e40c213ce39c40c58");
         }
     }
 }

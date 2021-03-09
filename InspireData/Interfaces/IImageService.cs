@@ -8,7 +8,7 @@ namespace InspireData
 {
     public interface IImageService
     {
-        Task<IImageData> GetImageData();
+        ImageData GetImageData();
     }
 
     /// <summary>

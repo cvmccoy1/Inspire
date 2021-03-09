@@ -11,7 +11,7 @@ namespace InspireData
     /// </summary>
     public interface IWeatherService
     {
-        Task<IWeatherData> GetWeatherData(string city);
+        IWeatherData GetWeatherData(string city);
     }
 
     public interface IWeatherData

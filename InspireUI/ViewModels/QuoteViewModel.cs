@@ -10,18 +10,8 @@ namespace Inspire.ViewModels
 {
     public class QuoteViewModel : BaseViewModel
     {
-        private IQuoteService _quoteService; 
-
-        /// <summary>
-        /// Contains a list of available quotes to display
-        /// </summary>
-        private List<IQuoteData> _quoteDataList;
-
-        /// <summary>
-        /// Contains the index into the list of quotes of the one currently in use
-        /// </summary>
-        private int _currentQuoteIndex = 0;
-
+        private IQuoteService _quoteService;
+        private QuoteData _quoteData;
 
         /// <summary>
         /// Property Bound to the Quote TextBlock Text
@@ -98,41 +88,17 @@ namespace Inspire.ViewModels
         /// been displayed, a request for 10 new quotes will be done.</remarks>
         private async void UpdateQuoteUi()
         {
-            await GetNextAvailableQuote();
+            _quoteData = await Task.Run(() => _quoteService.GetQouteData());
             UpdateQuoteAndAuthorUi();
         }
 
-        /// <summary>
-        /// A list of quotes (about 10) is kept until all the quotes in the list have been displayed.
-        /// Once all of the quotes have been used (or at start up), the list is refreshed with a new 
-        /// list of quotes, retrieved from the <see cref="QuoteService"/>.
-        /// </summary>
-        private async Task GetNextAvailableQuote()
-        {
-            int quoteCount = _quoteDataList != null ? _quoteDataList.Count : 0;
-            if (++_currentQuoteIndex >= quoteCount)
-            {
-                try
-                {
-                    _quoteDataList = await _quoteService.GetQouteData();
-                }
-                catch (Exception exp)
-                {
-                    Debug.Fail($"Unable to retieve the quote data list: {exp.Message}");
-                }
-                finally
-                {
-                    _currentQuoteIndex = 0;
-                }
-            }
-        }
 
         private void UpdateQuoteAndAuthorUi()
         {
-            if (_quoteDataList != null && _quoteDataList.Count > 0)
+            if (_quoteData != null && !string.IsNullOrWhiteSpace(_quoteData.Quote))
             {
-                Quote = _quoteDataList[_currentQuoteIndex].Quote.TrimEnd('\n');
-                Author = $"-- {_quoteDataList[_currentQuoteIndex].Author}";
+                Quote = _quoteData.Quote.TrimEnd('\n');
+                Author = $"-- {_quoteData.Author}";
             }
             else
             {
