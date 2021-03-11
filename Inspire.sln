@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspireUI.UnitTests", "InspireUI.UnitTests\InspireUI.UnitTests.csproj", "{D46E2C42-172E-427B-A048-BDCB9A2C91F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspireFactory", "InspireFactory\InspireFactory.csproj", "{C62E9F17-02EB-4263-8041-5D2F107A8D81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{D46E2C42-172E-427B-A048-BDCB9A2C91F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D46E2C42-172E-427B-A048-BDCB9A2C91F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D46E2C42-172E-427B-A048-BDCB9A2C91F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C62E9F17-02EB-4263-8041-5D2F107A8D81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C62E9F17-02EB-4263-8041-5D2F107A8D81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C62E9F17-02EB-4263-8041-5D2F107A8D81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C62E9F17-02EB-4263-8041-5D2F107A8D81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
