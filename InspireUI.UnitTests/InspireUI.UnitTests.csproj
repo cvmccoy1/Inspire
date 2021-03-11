@@ -59,6 +59,7 @@
     <Compile Include="Mocks\MockClassService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ClockViewModelTests.cs" />
+    <Compile Include="ViewModels\SupportClasses\TemperatureTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
