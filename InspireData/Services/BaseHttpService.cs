@@ -45,7 +45,7 @@ namespace InspireData
             return response;
         }
 
-        private async Task<T> ParseImageDataFromHttpResponseMessageAsync(HttpResponseMessage response) 
+        private async Task<T> ParseImageDataFromHttpResponseMessageAsync(HttpResponseMessage response)
         {
             T data = new T();
             try

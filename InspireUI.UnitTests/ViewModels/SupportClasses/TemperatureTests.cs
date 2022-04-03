@@ -1,10 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Inspire.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 
 namespace Inspire.ViewModels.UnitTests
@@ -22,7 +16,7 @@ namespace Inspire.ViewModels.UnitTests
         public void DisplayText_VerifyFahrenheitConvertion(double tempInKelving, int tempInFahrenheit)
         {
             // Assign
-            int tempModeSelectIndex = (int)TemperatureMode.Fahrenheit;
+            const int tempModeSelectIndex = (int)TemperatureMode.Fahrenheit;
             ObservableCollection<Temperature> collection = Temperature.PopulateCollection();
             string expectedDisplayName = $"{ tempInFahrenheit }° {collection[tempModeSelectIndex].Symbol}";
 
@@ -43,7 +37,7 @@ namespace Inspire.ViewModels.UnitTests
         public void DisplayText_VerifyCelsiusConvertion(double tempInKelving, int tempInFahrenheit)
         {
             // Assign
-            int tempModeSelectIndex = (int)TemperatureMode.Celsius;
+            const int tempModeSelectIndex = (int)TemperatureMode.Celsius;
             ObservableCollection<Temperature> collection = Temperature.PopulateCollection();
             string expectedDisplayName = $"{ tempInFahrenheit }° {collection[tempModeSelectIndex].Symbol}";
 
@@ -64,7 +58,7 @@ namespace Inspire.ViewModels.UnitTests
         public void DisplayText_VerifyKelvinConvertion(double tempInKelving, int tempInFahrenheit)
         {
             // Assign
-            int tempModeSelectIndex = (int)TemperatureMode.Kelvin;
+            const int tempModeSelectIndex = (int)TemperatureMode.Kelvin;
             ObservableCollection<Temperature> collection = Temperature.PopulateCollection();
             string expectedDisplayName = $"{ tempInFahrenheit }° {collection[tempModeSelectIndex].Symbol}";
 

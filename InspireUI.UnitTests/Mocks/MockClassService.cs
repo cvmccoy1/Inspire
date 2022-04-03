@@ -1,16 +1,13 @@
 ﻿using InspireData;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace InspireUI.UnitTests
 {
-    class MockClassService : IClockService
+    internal class MockClassService : IClockService
     {
-        private ClockData _clockData;
-        private int _interval;
+        private readonly ClockData _clockData;
+        private readonly int _interval;
         //
         public MockClassService(DateTime currentTime, int interval)
         {

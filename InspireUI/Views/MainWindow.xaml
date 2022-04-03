@@ -6,6 +6,8 @@
         xmlns:view="clr-namespace:Inspire.Views"
         xmlns:p="clr-namespace:Inspire.Properties"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:viewmodels="clr-namespace:Inspire.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
         mc:Ignorable="d"
         Title="In Time Tec Take Home Assignment" 
         Icon="/Resources/in-time-tec.jpg"

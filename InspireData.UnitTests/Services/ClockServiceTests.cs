@@ -21,7 +21,7 @@ namespace InspireData.Tests
             string actualTime = clockService.GetClockData().CurrentTime.ToString(TIME_FORMAT);
 
             // Assert
-            Assert.AreEqual(expectedTime, actualTime, $"Current Time provided doesn't appear to be correct.");
+            Assert.AreEqual(expectedTime, actualTime, "Current Time provided doesn't appear to be correct.");
         }
 
 
@@ -37,11 +37,11 @@ namespace InspireData.Tests
             // Arrange
             IClockData clockData = clockService.GetClockData();
             string expectedDateTime = clockData.CurrentTime.AddMinutes(1.0).ToString(TIME_FORMAT);
-            EventHandler<ClockEventArgs> ClockUpdateEvent = (sender, e) =>
+            void ClockUpdateEvent(object sender, ClockEventArgs e)
             {
                 _newTime = e.ClockData.CurrentTime.ToString(TIME_FORMAT);
                 _signal.Release();
-            };
+            }
 
             // Act
             Assert.IsTrue(clockService.StartClockUpdateTimer(), "The Clock Timer should not have already been started.");
@@ -49,7 +49,7 @@ namespace InspireData.Tests
             try
             {
                 // Assert
-                Assert.IsTrue(await _signal.WaitAsync(65000), $"The Clock Service event did not fire within a minute.");
+                Assert.IsTrue(await _signal.WaitAsync(65000), "The Clock Service event did not fire within a minute.");
                 Assert.AreEqual(expectedDateTime, _newTime, "The new time is not one minute past the original time.");
                 Assert.IsFalse(clockService.StartClockUpdateTimer(), "The Clock Timer should have already been started.");
             }

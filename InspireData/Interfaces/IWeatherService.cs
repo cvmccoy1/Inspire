@@ -32,12 +32,12 @@ namespace InspireData
         double LowTemperature { get; }
 
         /// <summary>
-        /// Url to an icon representative of the current weather conditions
+        /// URL to an icon representative of the current weather conditions
         /// </summary>
         string WeatherIconUrl { get; }
 
         /// <summary>
-        /// A descripton of the current weather conditions (in plain text)
+        /// A description of the current weather conditions (in plain text)
         /// </summary>
         string Description { get; }
     }

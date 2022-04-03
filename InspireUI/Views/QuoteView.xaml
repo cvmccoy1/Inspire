@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             mc:Ignorable="d" 
+             xmlns:viewmodels="clr-namespace:Inspire.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=viewmodels:QuoteViewModel}"
              d:DesignWidth="300">
 
     <GroupBox Margin="10,10,10,10" FontSize="16" FontWeight="Bold"  

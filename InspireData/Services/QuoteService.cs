@@ -43,11 +43,11 @@ namespace InspireData
             {
                 try
                 {
-                    _quoteDataList = GetDataFromService($"https://quotesondesign.com/wp-json/wp/v2/posts/?orderby=rand");
+                    _quoteDataList = GetDataFromService("https://quotesondesign.com/wp-json/wp/v2/posts/?orderby=rand");
                 }
                 catch (Exception exp)
                 {
-                    Debug.Fail($"Unable to retieve the quote data list: {exp.Message}");
+                    Debug.Fail($"Unable to retrieve the quote data list: {exp.Message}");
                 }
                 finally
                 {

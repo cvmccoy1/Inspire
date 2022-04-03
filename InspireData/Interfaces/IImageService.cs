@@ -12,7 +12,7 @@ namespace InspireData
     }
 
     /// <summary>
-    /// The Url to an image file.
+    /// The URL to an image file.
     /// </summary>
     public interface IImageData
     {
