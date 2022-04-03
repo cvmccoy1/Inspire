@@ -1,8 +1,0 @@
-C:\Users\cvmcc\source\repos\Inspire\InspireData\bin\Debug\InspireData.dll.config
-C:\Users\cvmcc\source\repos\Inspire\InspireData\bin\Debug\InspireData.dll
-C:\Users\cvmcc\source\repos\Inspire\InspireData\bin\Debug\InspireData.pdb
-C:\Users\cvmcc\source\repos\Inspire\InspireData\obj\Debug\InspireData.csprojAssemblyReference.cache
-C:\Users\cvmcc\source\repos\Inspire\InspireData\obj\Debug\InspireData.csproj.CoreCompileInputs.cache
-C:\Users\cvmcc\source\repos\Inspire\InspireData\obj\Debug\InspireData.csproj.CopyComplete
-C:\Users\cvmcc\source\repos\Inspire\InspireData\obj\Debug\InspireData.dll
-C:\Users\cvmcc\source\repos\Inspire\InspireData\obj\Debug\InspireData.pdb
