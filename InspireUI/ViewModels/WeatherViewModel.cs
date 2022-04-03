@@ -18,43 +18,43 @@ namespace Inspire.ViewModels
         private const string LOCAL_CITY = "Eagle";
 
         /// <summary>
-        /// Propety bound to the Current Temperature TextBlock
+        /// Property bound to the Current Temperature TextBlock
         /// </summary>
         public string CurrentTemperature { get; set; }
 
         /// <summary>
-        /// Propety bound to the High Temperature TextBlock
+        /// Property bound to the High Temperature TextBlock
         /// </summary>
         public string HighTemperature { get; set; }
 
         /// <summary>
-        /// Propety bound to the High Temperature TextBlock
+        /// Property bound to the High Temperature TextBlock
         /// </summary>
         public string LowTemperature { get; set; }
 
         /// <summary>
-        /// Propety bound to the Current Temperature's Condition TextBlock
+        /// Property bound to the Current Temperature's Condition TextBlock
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        /// Propety bound to the Current Temperature's Condition Image (Icon)
+        /// Property bound to the Current Temperature's Condition Image (Icon)
         /// </summary>
         public BitmapImage WeatherIcon { get; set; }
 
         /// <summary>
-        /// Propety bound to the Temperature Format Combobox's List of Options
+        /// Property bound to the Temperature Format Combo-box's List of Options
         /// </summary>
         public ObservableCollection<Temperature> Temperatures { get; set; }
 
         private Temperature _selectedTemperature;
         /// <summary>
-        /// Property bound to the Temperature Format Combobox's Currently Selected Item
+        /// Property bound to the Temperature Format Combo-box's Currently Selected Item
         /// </summary>
         public Temperature SelectedTemperature
         {
             get => _selectedTemperature;
-            set 
+            set
             {
                 if (_selectedTemperature != value)
                 {
@@ -65,7 +65,7 @@ namespace Inspire.ViewModels
         }
 
         /// <summary>
-        /// Property bound to the Temperature Format Combobox's Currently Selected Index
+        /// Property bound to the Temperature Format Combo-box's Currently Selected Index
         /// </summary>
         [SuppressPropertyChangedWarnings]
         public int SelectedTemperatureIndex
@@ -96,9 +96,11 @@ namespace Inspire.ViewModels
         {
             if (_weatherTimer == null)
             {
-                _weatherTimer = new System.Timers.Timer();
-                _weatherTimer.AutoReset = true;
-                _weatherTimer.Elapsed += new System.Timers.ElapsedEventHandler(TimerElapsedEvent);
+                _weatherTimer = new System.Timers.Timer
+                {
+                    AutoReset = true
+                };
+                _weatherTimer.Elapsed += TimerElapsedEvent;
                 _weatherTimer.Interval = 10 * 60 * 1000;  // Check Weather every 10 minutes for update
                 _weatherTimer.Start();
             }
@@ -106,7 +108,7 @@ namespace Inspire.ViewModels
 
         private void TimerElapsedEvent(object sender, ElapsedEventArgs e)
         {
-            _syncContext.Post(o => UpdateWeatherUi(), null);
+            _syncContext.Post(_ => UpdateWeatherUi(), null);
         }
 
         private void UpdateWeatherUi()
@@ -117,7 +119,7 @@ namespace Inspire.ViewModels
 
                 Temperature selectedTemperatureMode = SelectedTemperature;
                 CurrentTemperature = selectedTemperatureMode.DisplayText(currentWeatherData.CurrentTemperature);
-                HighTemperature = selectedTemperatureMode.DisplayText(currentWeatherData.HighTemperature); 
+                HighTemperature = selectedTemperatureMode.DisplayText(currentWeatherData.HighTemperature);
                 LowTemperature = selectedTemperatureMode.DisplayText(currentWeatherData.LowTemperature);
                 Description = currentWeatherData.Description;
                 WeatherIcon = GetWeatherIconFromUrl(currentWeatherData.WeatherIconUrl);

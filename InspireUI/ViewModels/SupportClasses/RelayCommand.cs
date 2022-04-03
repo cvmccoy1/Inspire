@@ -6,7 +6,7 @@ namespace Inspire.ViewModels
     /// <summary>
     /// Class that utilizes a common patten to provide support for the MVVM framework to
     /// make binding to controls (such as buttons) easier.
-    /// The code (or similar) is available all over the internet.
+    /// The code (or similar) is available all over the Internet.
     /// </summary>
     public class RelayCommand : ICommand
     {
@@ -21,7 +21,7 @@ namespace Inspire.ViewModels
 
         public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
         {
-            _execute = execute ?? throw new ArgumentNullException("execute");
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
         }
 

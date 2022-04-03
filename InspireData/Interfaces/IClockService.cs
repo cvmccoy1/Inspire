@@ -12,7 +12,7 @@ namespace InspireData
     public interface IClockService
     {
         /// <summary>
-        /// Gets the lastest Clock Data
+        /// Gets the latest Clock Data
         /// </summary>
         /// <returns>A <see cref="ClockData"/> object</returns>
         ClockData GetClockData();

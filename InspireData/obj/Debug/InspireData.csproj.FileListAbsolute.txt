@@ -5,3 +5,4 @@ C:\Users\cvmcc\source\repos\Inspire\InspireData\bin\Debug\InspireData.pdb
 C:\Users\cvmcc\source\repos\Inspire\InspireData\obj\Debug\InspireData.csproj.CopyComplete
 C:\Users\cvmcc\source\repos\Inspire\InspireData\obj\Debug\InspireData.dll
 C:\Users\cvmcc\source\repos\Inspire\InspireData\obj\Debug\InspireData.pdb
+C:\Users\cvmcc\source\repos\Inspire\InspireData\obj\Debug\InspireData.csprojAssemblyReference.cache

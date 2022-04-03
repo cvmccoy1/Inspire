@@ -19,7 +19,7 @@ namespace Inspire.ViewModels
         public string TimeOfDayGreeting { get; set; }
 
         /// <summary>
-        /// Property bound to the 24 Hour Mode Checkbox
+        /// Property bound to the 24 Hour Mode Check-box
         /// </summary>
         private bool _is24HourMode = false;
         public bool Is24HourMode

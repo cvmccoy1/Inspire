@@ -30,9 +30,11 @@ namespace InspireData
         {
             if (_clockTimer == null)
             {
-                _clockTimer = new Timer();
-                _clockTimer.AutoReset = false;
-                _clockTimer.Elapsed += new ElapsedEventHandler(TimerElapsedEvent);
+                _clockTimer = new Timer
+                {
+                    AutoReset = false
+                };
+                _clockTimer.Elapsed += TimerElapsedEvent;
                 _clockTimer.Interval = GetInterval();
                 _clockTimer.Start();
                 return true;
@@ -43,11 +45,12 @@ namespace InspireData
         /// <summary>
         /// Event that fires every minute on the minute, providing an updated <see cref="ClockData"/> object.
         /// </summary>
-        public event EventHandler<ClockEventArgs> ClockUpdateEvent = (sender, e) => 
+        public event EventHandler<ClockEventArgs> ClockUpdateEvent = (sender, e) =>
         {
             // A body for debugging
         };
 
+        private const int SECONDS_PER_MINUTE = 60;
         private static Timer _clockTimer;
 
         /// <summary>
@@ -66,7 +69,7 @@ namespace InspireData
         private double GetInterval()
         {
             DateTime now = DateTime.Now;
-            return ((60 - now.Second) * 1000 - now.Millisecond);
+            return ((SECONDS_PER_MINUTE - now.Second) * 1000) - now.Millisecond;
         }
     }
 }

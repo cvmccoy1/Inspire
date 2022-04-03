@@ -10,7 +10,7 @@ namespace Inspire.ViewModels
 {
     public class QuoteViewModel : BaseViewModel
     {
-        private IQuoteService _quoteService;
+        private readonly IQuoteService _quoteService;
         private QuoteData _quoteData;
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Inspire.ViewModels
             QuoteMouseEnterCommand = new RelayCommand(o => QuoteMouseEnter(nameof(QuoteMouseEnterCommand)));
             QuoteMouseLeaveCommand = new RelayCommand(o => QuoteMouseLeave(nameof(QuoteMouseLeaveCommand)));
 
-            // Initially the Author TextBlock is hidden...visible only when mouse is hoving over the Quote TextBlock
+            // Initially the Author TextBlock is hidden...visible only when mouse is hovering over the Quote TextBlock
             AuthorVisibility = Visibility.Hidden;
 
             UpdateQuoteUi();

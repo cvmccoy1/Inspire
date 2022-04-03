@@ -3,12 +3,12 @@ using System.Text.RegularExpressions;
 
 namespace InspireData
 {
-    public class FormatConverter
+    public static class FormatConverter
     {
         /// <summary>
         /// Converts HTML to Text.
         /// </summary>
-        /// <param name="html">A string reprenting the HTML to convert to text.</param>
+        /// <param name="html">A string representing the HTML to convert to text.</param>
         /// <returns>The converted text string.</returns>
         /// <remarks>Leveled from code seen on stackoverflow.com.</remarks>
         public static string HTMLToText(string html)
@@ -21,7 +21,7 @@ namespace InspireData
             Regex tagWhiteSpaceRegex = new Regex(tagWhiteSpace, RegexOptions.Multiline);
 
             string text = html;
-            //Decode html specific characters
+            //Decode HTML specific characters
             text = System.Net.WebUtility.HtmlDecode(text);
             //Remove tag whitespace/line breaks
             text = tagWhiteSpaceRegex.Replace(text, "><");

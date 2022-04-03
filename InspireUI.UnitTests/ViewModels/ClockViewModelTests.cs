@@ -1,11 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Inspire.ViewModels;
+﻿using Inspire.ViewModels;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using InspireData;
 using System.Threading;
 
 namespace InspireUI.UnitTests
@@ -23,8 +18,10 @@ namespace InspireUI.UnitTests
 
             // Assign
             DateTime expectedCurrentTime = new DateTime(2000, 1, 1, hour, minute, 00);
-            ClockViewModel viewModel = new ClockViewModel(new MockClassService(expectedCurrentTime, 100));
-            viewModel.Is24HourMode = false;
+            ClockViewModel viewModel = new ClockViewModel(new MockClassService(expectedCurrentTime, 100))
+            {
+                Is24HourMode = false
+            };
 
             // Act & Assert
             Assert.AreEqual(expectedCurrentTime.ToString(TIME_FORMAT_12), viewModel.CurrentTime, "The Initial Display Time is not correct");

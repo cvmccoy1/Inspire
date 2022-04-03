@@ -13,7 +13,7 @@ namespace Inspire.ViewModels
     /// </summary>
     public class MainWindowViewModel : BaseViewModel
     {
-        private IImageService _imageService;
+        private readonly IImageService _imageService;
 
         /// <summary>
         /// Property bound to the Background's Image
@@ -36,9 +36,9 @@ namespace Inspire.ViewModels
         {
             _imageService = imageService;
 
-            //Establish bindling to the New Image button
-            NewImageButtonCommand = new RelayCommand(o => NewImageButtonClick(nameof(NewImageButtonCommand)));
-            ImageChangedCommand = new RelayCommand(o => ImageChanged(nameof(ImageChangedCommand)));
+            //Establish binding to the New Image button
+            NewImageButtonCommand = new RelayCommand(_ => NewImageButtonClick(nameof(NewImageButtonCommand)));
+            ImageChangedCommand = new RelayCommand(_ => ImageChanged(nameof(ImageChangedCommand)));
 
             UpdateBackgroundImageUiAsync();
         }
@@ -74,7 +74,7 @@ namespace Inspire.ViewModels
             catch (Exception exp)
             {
                 SetMouseCursor(null);
-                Debug.Fail($"Unable to retieve the background image: {exp.Message}");
+                Debug.Fail($"Unable to retrieve the background image: {exp.Message}");
             }
         }
     }

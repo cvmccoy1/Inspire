@@ -10,7 +10,7 @@ namespace Inspire.ViewModels
         Kelvin,
     }
     /// <summary>
-    /// Helper class used by the Temperature Mode selection combobox.
+    /// Helper class used by the Temperature Mode selection combo-box.
     /// Provides methods for converting from one mode to another.
     /// Currently, converts only from kelvin.
     /// </summary>
