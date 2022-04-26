@@ -54,11 +54,11 @@ namespace Inspire.ViewModels
             _quoteService = quoteService;
 
             // Establish binding to the New Quote button
-            NewQuoteButtonCommand = new RelayCommand(o => NewQuoteButtonClick(nameof(NewQuoteButtonCommand)));
+            NewQuoteButtonCommand = new RelayCommand(_ => NewQuoteButtonClick(nameof(NewQuoteButtonCommand)));
 
             // Establish binding to the Mouse Enter and Leave events for the Quote TextBlock
-            QuoteMouseEnterCommand = new RelayCommand(o => QuoteMouseEnter(nameof(QuoteMouseEnterCommand)));
-            QuoteMouseLeaveCommand = new RelayCommand(o => QuoteMouseLeave(nameof(QuoteMouseLeaveCommand)));
+            QuoteMouseEnterCommand = new RelayCommand(_ => QuoteMouseEnter(nameof(QuoteMouseEnterCommand)));
+            QuoteMouseLeaveCommand = new RelayCommand(_ => QuoteMouseLeave(nameof(QuoteMouseLeaveCommand)));
 
             // Initially the Author TextBlock is hidden...visible only when mouse is hovering over the Quote TextBlock
             AuthorVisibility = Visibility.Hidden;

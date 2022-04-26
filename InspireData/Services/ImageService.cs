@@ -14,7 +14,7 @@ namespace InspireData
         /// <returns>An <see cref="ImageData"/> object.</returns>
         public ImageData GetImageData()
         {
-            return GetDataFromService($"http://www.splashbase.co/api/v1/images/random");
+            return GetDataFromService("http://www.splashbase.co/api/v1/images/random");
         }
     }
 }

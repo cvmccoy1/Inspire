@@ -33,12 +33,12 @@ namespace InspireData
 
         /// <summary>
         /// A list of quotes (about 10) is kept until all the quotes in the list have been displayed.
-        /// Once all of the quotes have been used (or at start up), the list is refreshed with a new 
+        /// Once all of the quotes have been used (or at start up), the list is refreshed with a new
         /// list of quotes, retrieved from the <see cref="QuoteService"/>.
         /// </summary>
         private void GetNextAvailableQuote()
         {
-            int quoteCount = _quoteDataList != null ? _quoteDataList.Count : 0;
+            int quoteCount = (_quoteDataList?.Count) ?? 0;
             if (++_currentQuoteIndex >= quoteCount)
             {
                 try
